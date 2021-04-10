@@ -1,0 +1,33 @@
+-
+    var BLOOD_TYPES = ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"];
+
+mixin bloodSelector(value)
+    div= value 
+
+mixin bloodTypeMixin(value, side)
+    .human(class=side)
+        .scribble   
+            span.blood_type= value 
+            .head 
+            .body 
+        .via 
+        .blood_via 
+
+#content 
+    h3= "Select the donor blood type:"
+    #blood_selector   
+        each type in BLOOD_TYPES 
+            +bloodSelector(type)
+    #blood_content
+        .bar 
+        .main_bag 
+            .blood 
+        #center_via_c 
+            .center_via 
+                .blood_via 
+        #humans 
+            each type, index in BLOOD_TYPES 
+                if (index % 2)
+                    +bloodTypeMixin(type, "right")
+                else 
+                    +bloodTypeMixin(type, "left")
